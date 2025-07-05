@@ -15,16 +15,16 @@
         <div class="col-md-4">
             <form>
                 <div class="mb-3">
-                    <label class="form-label">Ime</label>
-                    <input type="text" class="form-control" placeholder="Vaše ime">
-                </div>
-                <div class="mb-3">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-control" placeholder="Vaš email">
+                    <input type="email" name="email" class="form-control" placeholder="Vaš email">
+                </div>
+				      <div class="mb-3">
+                    <label class="form-label">Subject</label>
+                    <input type="text" name="subject" class="form-control" placeholder="Subject">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Poruka</label>
-                    <textarea class="form-control" rows="4" placeholder="Vaša poruka"></textarea>
+                    <label class="form-label">Message</label>
+                    <textarea class="form-control" name="message" rows="4" placeholder="Vaša poruka"></textarea>
                 </div>
                 <button type="submit" class="btn btn-dark">Pošalji</button>
             </form>
