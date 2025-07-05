@@ -1,1 +1,0 @@
-laravel.xbanging.com - domaci 
