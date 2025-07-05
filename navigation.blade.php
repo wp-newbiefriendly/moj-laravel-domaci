@@ -10,7 +10,7 @@
         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="/shop">Shop</a></li>
         <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="/kontakt">Kontakt</a></li>
+        <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
       </ul>
     </div>
 
@@ -21,7 +21,10 @@
 
     <!-- Desno: ITMentorstva, uvek vidljiv -->
     <span class="navbar-text text-white align-items-center order-3">
-      <i class="fa-solid fa-graduation-cap me-2"></i> ITMentorstva
+    <a href="https://github.com/wp-newbiefriendly/moj-laravel-domaci" target="_blank" class="text-white text-decoration-underline">
+    Link ka Domaćem</i> "GITHUB"
+  </a>
+		<i class="bi bi-github"></i>
     </span>
   </div>
 </nav>
