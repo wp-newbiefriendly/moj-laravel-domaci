@@ -1,30 +1,22 @@
-<?php
+@extends("layout")
 
-namespace App\Http\Controllers;
+@section("title")
+    <title> Home  </title>
 
-use App\Models\ProductModel;
-use Illuminate\Http\Request;
+@section("sadrzajstranice")
 
-class HomeController extends Controller
-{
-    public $timestamps = true;
+@if($sat < 12)
+  <p> Dobro jutro </p>		
+@else
+<p class="text-center"> Dobar dan! </p>
+@endif 
 
-    public function index()
-	{
-    $sat = date("H");
+<div class="container mt-5">
+    <h1 class="text-center">Home</h1>
+    <p class="text-center">Dobrodošli na početnu stranicu!</p>
+	<p class="text-center">Trenutno vreme je {{$trenutnoVreme}}</p>
+		<p class="text-center">Trenutni sat je {{$sat}}</p>
 
-    $trenutnoVreme = date("H:i:s");
-
-    $products = ProductModel::all();
-
-    // $latestProducts = ProductModel::orderBy('created_at', 'desc')->take(6)->get(); //->reverse() = za obrnuti redosled
-        $latestProducts = ProductModel::latest()->take(6)->get(); // izvuci poslednjih 6 kreiranih od 7
-
-        return view('welcome', [
-            'trenutnoVreme' => $trenutnoVreme,
-            'sat' => $sat,
-            'latestproducts' => $latestProducts,
-            'products' => $products
-        ]);
-    }
-}
+	
+</div>
+@endsection
