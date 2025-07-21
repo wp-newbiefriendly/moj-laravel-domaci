@@ -7,7 +7,7 @@ Route::view('/about', 'about');
 Route::get('/shop', [\App\Http\Controllers\ShopController::class, 'index']);
 Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'index']);
 Route::get('/admin/all-contacts', [\App\Http\Controllers\ContactController::class, 'getAllContacts'])
-->name('allcontacts');
+->name('admin.allcontacts');
 Route::get('/admin/delete-contact/{contact}', [\App\Http\Controllers\ContactController::class, 'deleteContact']);
 Route::get('/admin/undo-contact/{id}', [\App\Http\Controllers\ContactController::class, 'undoDelete']);
 
