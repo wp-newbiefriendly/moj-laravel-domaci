@@ -32,7 +32,7 @@ class ShopController extends Controller
 
         \App\Models\ProductModel::create($request->all());
 
-        return redirect()->route(route:"sviProizvodi")->with('success', 'Proizvod dodat!');
+        return redirect()->route(route:"admin.allproducts")->with('success', 'Proizvod dodat!');
     }
 
     public function editProduct(Request $request, ProductModel $product)
