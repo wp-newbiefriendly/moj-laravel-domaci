@@ -1,0 +1,25 @@
+za domaci #5 lekcija
+
+   get: -Napraviti stranicu "/admin/add-products"
+   * Prikazati formu za dodavanje proizvoda sa svim poljima iz baze
+   * Napraviti logiku za snimanje tih podataka "products"
+   * OBAVEZNO: Validacija, prikazivanje gresaka kao na kontakt formi na "welcome"
+     // sta validirati - cene - max lenght itd.
+
+   -Napraviti stranicu "admin/products"
+   Prikazati sve proizvode iz baze i sve informacije u HTML tabeli
+
+
+   Sema za pravljanje  "EDIT" crud funkcije
+
+   -- edit proizvoda
+   get: - Ruta web.php - /admin/product/ID -> 'admin/product/5' SELECT * FROM products WHERE id = 5
+   - Controller: ProductsController -> singleProduct
+   - Model: ProductModel
+   - Blade
+   post: ruta za snimanje podataka
+         - ruta web.php - /admin/products/save/ID - /admin/prducts/save/5
+
+      -- edit kontakta
+   -
+
