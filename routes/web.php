@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,7 +40,7 @@ Route::put('/admin/contact/{contact}', [\App\Http\Controllers\ContactController:
     ->name('updateContact');
 
 // Proizvodi
-Route::get('/admin/all-products', [\App\Http\Controllers\ProductsController::class, 'showAllProducts'])
+Route::get('/admin/all-products', [ProductsController::class, 'showAllProducts'])
     ->name('sviProizvodi');
 
 // Add proizvode
@@ -52,7 +53,7 @@ Route::get('/admin/products/edit/{product}', [\App\Http\Controllers\ShopControll
 Route::put('/admin/products/update/{product}', [\App\Http\Controllers\ShopController::class, 'updateProduct'])
     ->name('products.update');
 
-Route::get('/admin/delete-product/{product}', [\App\Http\Controllers\ProductsController::class, 'deleteProduct'])
+Route::get('/admin/delete-product/{product}', [ProductsController::class, 'deleteProduct'])
     ->name('obrisiProizvod');
 Route::get('/admin/undo-product/{id}', [\App\Http\Controllers\ShopController::class, 'undoDelete']);
 
