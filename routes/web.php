@@ -6,14 +6,15 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\AdminCheckMiddleware;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::view('/about', 'about');
+Route::view('/test', 'test');
 Route::get('/shop', [ShopController::class, 'index']);
 Route::get('/contact', [ContactController::class, 'index']);
 
-Route::middleware('auth')->prefix('admin')->group(function () {
-
+Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group(function () {
 // Admin pages:
 // Kontakt
     Route::get('/all-contacts', [ContactController::class, 'getAllContacts'])
@@ -23,35 +24,35 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
 // Delete/undo/edit kontakte
     Route::get('/delete/contact/{contact}', [ContactController::class, 'deleteContact'])
-        ->name('obrisiKontakt');
+        ->name('contact.delete');
     Route::get('/trashed-contacts', [ContactController::class, 'showTrashedContacts'])
         ->name('trashedContacts');
 
     Route::get('/undo-contact/{id}', [ContactController::class, 'undoDelete'])
         ->name('contact.undo');
     Route::get('/contact/{contact}/edit', [ContactController::class, 'editContact'])
-        ->name('editContact');
+        ->name('contact.edit');
     Route::put('/contact/{contact}', [ContactController::class, 'updateContact'])
         ->name('updateContact');
 
-// Proizvodi
+// Proizvodi:
     Route::get('/all-products', [ProductsController::class, 'showAllProducts'])
         ->name('admin.allproducts');
 
-// Add proizvode
+// Add proizvode:
     Route::get('/add-products', [ShopController::class, 'showAddProductForm'])
         ->name('admin.addproduct');
 
     Route::post('/add-products', [ShopController::class, 'storeProduct']);
 
-// Delete/edit proizvodi
+// Delete/edit proizvodi:
     Route::get('/products/edit/{product}', [ShopController::class, 'editProduct'])
         ->name('products.edit');
     Route::put('/products/update/{product}', [ShopController::class, 'updateProduct'])
         ->name('products.update');
 
     Route::get('/delete-product/{product}', [ProductsController::class, 'deleteProduct'])
-        ->name('obrisiProizvod');
+        ->name('products.delete');
     Route::get('/undo-product/{id}', [ShopController::class, 'undoDelete']);
 
 });

@@ -39,7 +39,7 @@
                 </td>
                 <td>
                     <a href="{{ route('products.edit', ['product' => $product->id]) }}" class="btn btn-sm btn-primary">Izmeni</a>
-                    <a href="{{ route('obrisiProizvod', ['product' => $product->id]) }}" class="btn btn-sm btn-danger">Obriši</a>
+                    <a href="{{ route('products.delete', ['product' => $product->id]) }}" class="btn btn-sm btn-danger">Obriši</a>
                 </td>
             </tr>
         @endforeach
