@@ -32,6 +32,6 @@ class GetRealCurrency extends Command
 
 //        $response = Http::get('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_D081BnRtbOXZZi6hgVsVggrpwLlJTZc5awSX47Uh&currencies=EUR%2CUSD%2CCAD&base_currency=EUR');
 
-        dd($response->json());
+        dd($response->json()['exchange_middle']);
     }
 }
