@@ -36,10 +36,8 @@ Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group
         ->name('updateContact');
 
 // Proizvodi:
-    Route::get('/all-products', [ProductsController::class, 'showAllProducts'])
-        ->name('admin.allproducts');
-
-// Add proizvode:
+// Add proizvode: Route::get('/all-products', [ProductsController::class, 'showAllProducts'])
+//        ->name('admin.allproducts');
     Route::get('/add-products', [ShopController::class, 'showAddProductForm'])
         ->name('admin.addproduct');
 
@@ -54,7 +52,6 @@ Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group
     Route::get('/delete-product/{product}', [ProductsController::class, 'deleteProduct'])
         ->name('products.delete');
     Route::get('/undo-product/{id}', [ShopController::class, 'undoDelete']);
-
 });
 
 require __DIR__.'/auth.php';
