@@ -47,14 +47,16 @@
         </table>
 
         @php
-            $undoId = session()->pull('undoProduct');
+            $undoProduct = session()->get('undoProduct');
         @endphp
 
-        @if($undoId)
+        @if($undoProduct)
             <div class="alert alert-warning">
-                Proizvod obrisan.
-                <a href="{{ url('/admin/undo-product/' . $undoId) }}">Poništi brisanje?</a>
+                {{ $undoProduct->id }} Proizvod {{ $undoProduct->name }} obrisan.
+                <a href="{{ url('/admin/undo-product/' . $undoProduct->id) }}">Poništi brisanje?</a>
             </div>
         @endif
 
-    @endsection
+
+
+@endsection

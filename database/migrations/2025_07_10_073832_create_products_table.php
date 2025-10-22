@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('amount');
             $table->float('price'); //decimal
             $table->string('image');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

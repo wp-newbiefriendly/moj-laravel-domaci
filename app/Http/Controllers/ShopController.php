@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\ContactModel;
 use App\Models\ProductModel;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
+
+    private $productRepo;
+    public function __construct()
+    {
+        $this->productRepo = new ProductRepository();
+    }
     public function index()
     {
         $products = ProductModel::all();
@@ -30,7 +37,7 @@ class ShopController extends Controller
             'image' => 'nullable|string|max:255'
         ]);
 
-        \App\Models\ProductModel::create($request->all());
+        $this->productRepo->createNew($request);
 
         return redirect()->route(route:"admin.allproducts")->with('success', 'Proizvod dodat!');
     }
@@ -40,7 +47,6 @@ class ShopController extends Controller
         if(!$product === null) {
             die('Ovaj proizvod ne postoji!');
         }
-
         return view('products.edit', compact('product'));
 
     }
@@ -56,12 +62,7 @@ class ShopController extends Controller
         ]);
 
         // OVDE se ažuriraju podaci iz forme
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->amount = $request->amount;
-        $product->price = $request->price;
-        $product->image = $request->image;
-        $product->save();
+        $this->productRepo->updateExist($request, $product->id);
 
         return redirect('/admin/all-products')
             ->with('success', 'Proizvod ažuriran pod brojem ID: ' . $product->id);
@@ -69,14 +70,14 @@ class ShopController extends Controller
 
     public function undoDelete($id)
     {
-        $product = ProductModel::withTrashed()->findOrFail($id);
+        // Pozivamo metodu iz repo-a za vraćanje proizvoda
+        $this->productRepo->undoDeleteExist($id);
 
-        if ($product->trashed()) {
-            $product->restore();
-        }
+        // Brisanje podatka iz sesije nakon poništavanja brisanja
+        session()->forget('undoProduct');
 
-        return redirect('/admin/all-products');
+        // Preusmeravamo korisnika na prethodnu stranicu sa porukom o uspehu
+        return redirect()->back()->with('success', 'Proizvod je uspešno vraćen.');
     }
-
 
 }

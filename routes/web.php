@@ -36,8 +36,8 @@ Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group
         ->name('updateContact');
 
 // Proizvodi:
-// Add proizvode: Route::get('/all-products', [ProductsController::class, 'showAllProducts'])
-//        ->name('admin.allproducts');
+    Route::get('/all-products', [ProductsController::class, 'showAllProducts'])
+        ->name('admin.allproducts');
     Route::get('/add-products', [ShopController::class, 'showAddProductForm'])
         ->name('admin.addproduct');
 
