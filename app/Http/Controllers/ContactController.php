@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\sendContact;
 use Illuminate\Http\Request;
 use App\Models\ContactModel;
+use App\Repositories\ContactRepository;
 use Illuminate\Support\Facades\Redirect;
 
 class ContactController extends Controller
 {
+    private $contactRepo;
+    public function __construct()
+    {
+        $this->contactRepo = new ContactRepository();
+    }
     public function index()
 	{
         return view(view:"contact");
@@ -20,43 +27,21 @@ class ContactController extends Controller
 
         return view("allContacts", compact('allContacts', 'trashedContacts', 'trashedCount'));
     }
-
-
-    public function sendContact(Request $request)
+    public function sendContact(sendContact $request)
     {
-        $request->validate([
-            'email' => 'required|string',
-            'subject' => 'required|string',
-            'description' => 'required|string|min:5',
-        ]);
-
-        ContactModel::create([
-            'email' => $request->get('email'),
-            'subject' => $request->get('subject'),
-            'message' => $request->get('description')
-        ]);
+        $this->contactRepo->sendContact($request);
 
         return redirect(to:'/shop');
     }
     public function deleteContact($id)
     {
-        $contact = ContactModel::find($id);
-
-        if (!$contact) {
-            abort(404, 'Kontakt nije pronađen.');
-        }
-
-        $contact->delete(); // Soft delete
+        $this->contactRepo->deleteContact($id); // ContactRepository->deleteContact
 
         return redirect('/admin/all-contacts')->with('undoContact', $id);
     }
     public function undoDelete($id)
     {
-        $contact = ContactModel::withTrashed()->find($id);
-
-        if ($contact && $contact->trashed()) {
-            $contact->restore();
-        }
+        $this->contactRepo->undoDelete($id);
 
         return redirect('/admin/all-contacts');
     }
@@ -66,18 +51,12 @@ class ContactController extends Controller
         return view('trashedContacts', compact('trashedContacts'));
     }
 
-
     public function editContact(Request $request, ContactModel $contact) {
 
         return view('editContact', compact('contact'));
     }
 
-    public function updateContact(Request $request, ContactModel $contact) {
-        $request->validate([
-            'email' => 'required|string',
-            'subject' => 'required|string',
-            'message' => 'nullable|max:1000'
-        ]);
+    public function updateContact(updateContact $request, ContactModel $contact) {
 
         $contact->update($request->all());
 

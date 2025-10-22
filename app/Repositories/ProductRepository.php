@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\ProductModel;
+use Illuminate\Http\Request;
 
 class ProductRepository
 {
@@ -40,23 +41,20 @@ class ProductRepository
 
     public function deleteExist($id)
     {
-        // Pronađi proizvod sa specifičnim ID-jem
         $product = ProductModel::findOrFail($id);
 
-        // Obriši proizvod
         $product->delete();
+
+        session()->put('undoProduct', $product);
     }
     public function undoDeleteExist($id)
     {
-        // Pronađi obrisani proizvod sa specifičnim ID-jem
         $product = ProductModel::withTrashed()->findOrFail($id);
 
-        // Ako je proizvod u trash-u, restauriraj ga
-        if ($product->trashed()) {
-            $product->restore();
-        }
+        $product->restore();
+
+        session()->forget('undoProduct');
+
     }
-
-
 
 }

@@ -21,16 +21,7 @@ class ProductsController extends Controller
 
     public function deleteProduct($id)
     {
-        // Nađite proizvod
-        $product = ProductModel::findOrFail($id);
-
-        // Soft delete proizvoda
-        $product->delete();
-
-        // Spremite proizvod u sesiju za undo
-        session()->put('undoProduct', $product);
-
-        // Preusmerite nazad sa porukom
+        $this->productRepo->deleteExist($id);
         return redirect()->back()->with('success', 'Proizvod je uspešno obrisan.');
     }
 
