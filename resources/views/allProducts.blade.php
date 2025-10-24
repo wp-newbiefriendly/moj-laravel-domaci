@@ -52,8 +52,8 @@
 
         @if($undoProduct)
             <div class="alert alert-warning">
-                {{ $undoProduct->id }} Proizvod {{ $undoProduct->name }} obrisan.
-                <a href="{{ url('/admin/undo-product/' . $undoProduct->id) }}">Poništi brisanje?</a>
+                ID: {{ $undoProduct->id }} | Proizvod "{{ $undoProduct->name }}" obrisan.
+                <a href="{{ route('products.undo', ['id' => $undoProduct->id]) }}">Poništi brisanje?</a>
             </div>
         @endif
 

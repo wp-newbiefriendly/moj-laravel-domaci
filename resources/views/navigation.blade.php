@@ -12,11 +12,12 @@
         <!-- Sredina: Meni -->
         <div class="collapse navbar-collapse justify-content-center order-2" id="navbarMenu">
             <ul class="navbar-nav mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="/admin/all-products">🛠 Admin Panel</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('products.all') }}">🛠 Admin Panel</a></li>
                 <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="/shop">Shop</a></li>
                 <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+
             </ul>
         </div>
 

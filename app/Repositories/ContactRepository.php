@@ -38,4 +38,18 @@ class ContactRepository
             $contact->restore();
         }
     }
+    public function updateExist($request, $id)
+    {
+        $contact = ContactModel::findOrFail($id);
+
+        $contact->email = $request->email;
+        $contact->subject = $request->subject;
+        $contact->message = $request->message;
+
+        // Spasi promene
+        $contact->save();
+
+        $contact->update($request->all());
+    }
+
 }

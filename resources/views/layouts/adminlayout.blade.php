@@ -17,10 +17,10 @@
         <div class="list-group list-group-flush">
             <a href="/" class="list-group-item list-group-item-action">🏠 Pocetna stranica (frontend)</a>
             <hr style="margin: 15px 0px 15px;">
-            <a href="/admin/all-products" class="list-group-item list-group-item-action">📦 Svi Proizvodi</a>
-            <a href="/admin/add-products" class="list-group-item list-group-item-action">➕ Dodaj Proizvod</a>
+            <a href="{{ route('products.all') }}" class="list-group-item list-group-item-action">📦 Svi Proizvodi</a>
+            <a href="{{ route('products.add') }}" class="list-group-item list-group-item-action">➕ Dodaj Proizvod</a>
             <hr style="margin: 15px 0px 15px;">
-            <a href="/admin/all-contacts" class="list-group-item list-group-item-action">🗂️ Lista Kontakta</a>
+            <a href="{{ route('contacts.all') }}" class="list-group-item list-group-item-action">🗂️ Lista Kontakta</a>
         </div>
     </div>
 

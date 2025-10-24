@@ -31,8 +31,8 @@
                 <td>{{ $contact->subject }}</td>
                 <td style="word-break: break-word;">{{ $contact->message }}</td>
                 <td class="d-flex flex-column flex-md-row gap-1">
-                    <a href="{{ route('contact.edit', ['contact' => $contact->id]) }}" class="btn btn-sm btn-primary w-100">Izmeni</a>
-                    <a href="{{ route('contact.delete', ['contact' => $contact->id]) }}" class="btn btn-sm btn-danger w-100">Obriši</a>
+                    <a href="{{ route('contacts.edit', ['contact' => $contact->id]) }}" class="btn btn-sm btn-primary w-100">Izmeni</a>
+                    <a href="{{ route('contacts.delete', ['contact' => $contact->id]) }}" class="btn btn-sm btn-danger w-100">Obriši</a>
                 </td>
             </tr>
         @endforeach
@@ -54,7 +54,7 @@
                     <td>{{ $trashed->email }}</td>
                     <td>{{ $trashed->message }}</td>
                     <td>
-                        <form method="GET" action="{{ route('contact.undo', ['id' => $trashed->id]) }}">
+                        <form method="GET" action="{{ route('contacts.undo', ['id' => $trashed->id]) }}">
                             <button class="btn btn-success btn-sm">Vrati</button>
                         </form>
 

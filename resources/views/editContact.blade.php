@@ -16,10 +16,9 @@
     @endif
 
     <!-- Forma za editovanje, koristimo metodu PUT -->
-    <form method="POST" action="{{ route('updateContact', ['contact' => $contact->id]) }}">
+    <form method="POST" action="{{ route('contacts.update', ['contact' => $contact->id]) }}">
         @csrf
         @method('PUT')
-
 
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
@@ -38,6 +37,6 @@
 
 
         <button type="submit" class="btn btn-primary me-2">Sačuvaj izmene</button>
-        <a href="/admin/all-contacts" class="btn btn-secondary">Nazad na listu</a>
+        <a href="{{ route('contacts.all') }}" class="btn btn-secondary">Nazad na listu</a>
     </form>
 @endsection

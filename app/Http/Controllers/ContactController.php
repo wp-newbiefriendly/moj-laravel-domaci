@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\sendContact;
+use App\Http\Requests\updateContact;
 use Illuminate\Http\Request;
 use App\Models\ContactModel;
 use App\Repositories\ContactRepository;
-use Illuminate\Support\Facades\Redirect;
-
 class ContactController extends Controller
 {
     private $contactRepo;
@@ -37,13 +36,13 @@ class ContactController extends Controller
     {
         $this->contactRepo->deleteContact($id); // ContactRepository->deleteContact
 
-        return redirect('/admin/all-contacts')->with('undoContact', $id);
+        return redirect()->route('contacts.all')->with('undoContact', $id);
     }
     public function undoDelete($id)
     {
         $this->contactRepo->undoDelete($id);
 
-        return redirect('/admin/all-contacts');
+        return redirect()->route('contacts.all');
     }
     public function showTrashedContacts()
     {
@@ -51,16 +50,17 @@ class ContactController extends Controller
         return view('trashedContacts', compact('trashedContacts'));
     }
 
-    public function editContact(Request $request, ContactModel $contact) {
+    public function editContact(ContactModel $contact) {
 
         return view('editContact', compact('contact'));
     }
 
     public function updateContact(updateContact $request, ContactModel $contact) {
 
-        $contact->update($request->all());
+        $this->contactRepo->updateExist($request, $contact->id);
 
-        return redirect('/admin/all-contacts')
+        return redirect()->route('contacts.all')
             ->with('success', 'Kontakt ažuriran pod brojem ID: ' . $contact->id);
     }
+
 }

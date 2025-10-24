@@ -18,24 +18,24 @@ Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group
 // Admin pages:
 // Delete/undo/edit kontakte
     Route::controller(ContactController::class)->prefix('/contact')->group(function () {
-        Route::get('/all-contacts', 'getAllContacts')->name('admin.allcontacts');
-        Route::get('/send-contact', 'sendContact')->name('sendContact');
-        Route::get('/delete-contact/{contact}', 'deleteContact')->name('contact.delete');
-        Route::get('/trashed-contacts', 'showTrashedContacts')->name('trashedContacts');
-        Route::get('/undo-contact/{id}', 'undoDelete')->name('contact.undo');
-        Route::get('/{contact}/edit', 'editContact')->name('contact.edit');
-        Route::put('/{contact}', 'updateContact')->name('updateContact');
-    })
-// Proizvodi:
-    Route::controller(ProductsController::class)->group(function () {
-        Route::get('/all-products', 'showAllProducts')->name('products.all');
-        Route::get('/add-products', 'showAddProductForm')->name('products.add');
-        Route::post('/add-products', 'storeProduct');
-        Route::get('/products/edit/{product}', 'editProduct')->name('products.edit');
-        Route::put('/products/update/{product}', 'updateProduct')->name('products.update');
-        Route::get('/delete-product/{product}', 'deleteProduct')->name('products.delete');
-        Route::get('/undo-product/{id}', 'undoDelete');
-    })
+        Route::get('/all', 'getAllContacts')->name('contacts.all');
+        Route::get('/send-contact', 'sendContact')->name('contacts.send');
+        Route::get('/delete/{contact}', 'deleteContact')->name('contacts.delete');
+        Route::get('/trashed', 'showTrashedContacts')->name('contacts.trashed');;
+        Route::get('/undo/{id}', 'undoDelete')->name('contacts.undo');
+        Route::get('/edit/{contact}', 'editContact')->name('contacts.edit');
+        Route::put('/update/{contact}', 'updateContact')->name('contacts.update');
+    });
+    // Proizvodi:
+    Route::controller(ProductsController::class)->prefix('/product')->group(function () {
+        Route::get('/all', 'showAllProducts')->name('products.all');
+        Route::get('/add', 'showAddProductForm')->name('products.add');
+        Route::post('/add-products', 'storeProduct')->name('products.store');
+        Route::get('/edit/{product}', 'editProduct')->name('products.edit');
+        Route::put('/update/{product}', 'updateProduct')->name('products.update');
+        Route::get('/delete/{product}', 'deleteProduct')->name('products.delete');
+        Route::get('/undo/{id}', 'undoDelete')->name('products.undo');
+    });
 });
 
 require __DIR__.'/auth.php';
