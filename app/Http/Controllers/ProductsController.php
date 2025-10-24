@@ -35,7 +35,7 @@ class ProductsController extends Controller
 
         $this->productRepo->createNew($request);
 
-        return redirect()->route(route:"admin.allproducts")->with('success', 'Proizvod dodat!');
+        return redirect()->route('products.all')->with('success', 'Proizvod dodat!');
     }
 
     public function editProduct(ProductModel $product)
@@ -51,7 +51,7 @@ class ProductsController extends Controller
     {
         $this->productRepo->updateExist($request, $product->id);
 
-        return redirect('/admin/all-products')
+        return redirect()->route('products.all')
             ->with('success', 'Proizvod ažuriran pod brojem ID: ' . $product->id);
     }
 
