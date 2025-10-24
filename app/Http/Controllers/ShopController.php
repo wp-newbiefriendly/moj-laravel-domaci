@@ -36,7 +36,7 @@ class ShopController extends Controller
         return redirect()->route(route:"admin.allproducts")->with('success', 'Proizvod dodat!');
     }
 
-    public function editProduct(Request $request, ProductModel $product)
+    public function editProduct(ProductModel $product)
     {
         if(!$product === null) {
             die('Ovaj proizvod ne postoji!');

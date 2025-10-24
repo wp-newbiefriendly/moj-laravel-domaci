@@ -14,7 +14,7 @@ class ProductsController extends Controller
         $this->productRepo = new ProductRepository();
     }
     // GET: Prikaz svih proizvoda
-    public function showALLProducts() {
+    public function showAllProducts() {
         $products = \App\Models\ProductModel::all();
         return view('allProducts', compact('products'));
     }
