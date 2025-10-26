@@ -16,7 +16,7 @@ Route::get('/contact', [ContactController::class, 'index']);
 
 Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group(function () {
 // Admin pages:
-// Delete/undo/edit kontakti:
+// Kontakti:
     Route::controller(ContactController::class)->prefix('/contact')->name('contacts.')->group(function () {
         Route::get('/all', 'getAllContacts')->name('all');
         Route::get('/send-contact', 'sendContact')->name('send');
