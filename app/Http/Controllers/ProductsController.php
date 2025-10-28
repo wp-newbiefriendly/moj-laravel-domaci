@@ -21,6 +21,11 @@ class ProductsController extends Controller
         return view('allProducts', compact('products'));
     }
 
+    public function permalink(ProductModel $product)
+    {
+        return view('products.permalink', compact('product'));
+    }
+
     public function deleteProduct($id)
     {
         $this->productRepo->deleteExist($id);

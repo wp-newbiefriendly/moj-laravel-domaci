@@ -14,7 +14,10 @@
 
 @foreach($products as $product)
 
-   <p> {{ $product->name}} – {{ $product->description }} - {{$product->price}}e </p>
+   <p> {{ $product->name}} – {{ $product->description }} - {{$product->price}}e
+{{--    <a href="{{ route("products.permalink", ["product" => $product->id]) }}" class="button">Detaljnije</a>--}}
+       <a class="btn btn-outline-primary" href="{{ route("products.permalink", ["product" => $product->id]) }}" role="button">Detaljnije</a>
+   </p>
 
    @endforeach
 
