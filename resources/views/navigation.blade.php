@@ -17,7 +17,10 @@
                 <li class="nav-item"><a class="nav-link" href="/shop">Shop</a></li>
                 <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
-
+                <li class="nav-item d-inline-flex align-items-center">
+                    <i class="fa-solid fa-cart-shopping" style="color: #63E6BE;"></i>
+                    <a class="nav-link" href="{{ route('cart.index') }}">Cart</a>
+                </li>
             </ul>
         </div>
 

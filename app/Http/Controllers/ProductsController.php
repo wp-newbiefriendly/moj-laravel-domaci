@@ -11,10 +11,8 @@ use Illuminate\Http\Request;
 class ProductsController extends Controller
 {
     private $productRepo;
-    public function __construct()
-    {
-        $this->productRepo = new ProductRepository();
-    }
+    public function __construct(private ProductRepository $productRepository){}
+
     // GET: Prikaz svih proizvoda
     public function showAllProducts() {
         $products = \App\Models\ProductModel::all();

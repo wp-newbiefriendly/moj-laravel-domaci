@@ -1,0 +1,30 @@
+.cart-table {
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.cart-summary {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+hr.solid {
+    border-top: 3px solid #bbb;
+    width: 50%;
+    margin: 20px auto;
+}

@@ -10,10 +10,8 @@ use App\Repositories\ContactRepository;
 class ContactController extends Controller
 {
     private $contactRepo;
-    public function __construct()
-    {
-        $this->contactRepo = new ContactRepository();
-    }
+    public function __construct(private ContactRepository $contactRepository){}
+
     public function index()
 	{
         return view(view:"contact");
