@@ -59,5 +59,4 @@ class ContactController extends Controller
         return redirect()->route('contacts.all')
             ->with('success', 'Kontakt ažuriran pod brojem ID: ' . $contact->id);
     }
-
 }
