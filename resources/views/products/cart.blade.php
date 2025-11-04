@@ -41,6 +41,7 @@
                 <div class="cart-summary">
                     <h4>Ukupna vrednost korpe: {{ $totalPrice }}€</h4>
                 </div>
+                <a href="{{ route('cart.finish') }}" class="primary-button mt-3">Izvrsi porudzbinu</a>
             </div>
         @else
             <h3 class="text-center">Nema proizvoda u korpi</h3>

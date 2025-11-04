@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CartAddRequest;
+use App\Models\OrderItems;
+use App\Models\Orders;
 use App\Models\ProductModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -13,8 +15,9 @@ class ShoppingCartController extends Controller
     {
         $combined = [];
         $totalPrice = 0;
+        $cart = Session::get('product', []);
 
-        foreach (Session::get('product') as $item) {
+        foreach ($cart as $item) {
             $product = ProductModel::firstWhere(['id' => $item['product_id']]);
             if ($product) {
                 $total = $item['amount'] * $product->price;
@@ -46,5 +49,40 @@ class ShoppingCartController extends Controller
         ]);
 
         return redirect('/cart');
+    }
+    public function finishOrder()
+    {
+        $cart = Session::get('product', []);
+        $totalPrice = 0;
+
+        foreach ($cart as $item) {
+            $product = ProductModel::firstWhere(['id' => $item['product_id']]);
+            $totalPrice = $item['amount'] * $product->price;
+            if ($item['amount'] > $product->amount)
+            {
+              return redirect()->back()->with("error", "Nema dovoljno proizvoda!");
+            }
+
+            $order = Orders::create([
+                'user_id' => auth()->user()->id,
+                'total_price' => $totalPrice,
+            ]);
+
+            foreach ($cart as $item) {
+                $product = ProductModel::firstWhere(['id' => $item['product_id']]);
+                $product->amount -= $item['amount'];
+                $product->save();
+
+                OrderItems::create([
+                    'order_id' => $order->id,
+                    'product_id' => $item['product_id'],
+                    'amount' => $item['amount'],
+                    'price' => $item['price'] * $item['amount'],
+                ]);
+            }
+            Session::remove('product');
+
+            return view('thankyou');
+        }
     }
 }

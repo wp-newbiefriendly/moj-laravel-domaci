@@ -8,13 +8,14 @@ use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminCheckMiddleware;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/about', 'about');
 Route::view('/test', 'test');
 Route::get('/shop', [ShopController::class, 'index']);
 Route::get('products/{product}', [ProductsController::class, 'permalink'])->name('products.permalink');
 Route::post("cart/add", [ShoppingCartController::class, 'addToCart'])->name('cart.add');
 Route::get("/cart", [ShoppingCartController::class, 'index'])->name('cart.index');
+Route::get("/cart/finish", [ShoppingCartController::class, 'finishOrder'])->name('cart.finish');
 
 Route::get('/contact', [ContactController::class, 'index']);
 
