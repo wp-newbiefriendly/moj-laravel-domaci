@@ -11,13 +11,23 @@ class ShoppingCartController extends Controller
 {
     public function index(ProductModel $product)
     {
-        $cart = Session::get('product', []);
+        $combined = [];
         $totalPrice = 0;
 
-        foreach ($cart as $product) {
-            $totalPrice += $product['amount'] * $product['price'];
+        foreach (Session::get('product') as $item) {
+            $product = ProductModel::firstWhere(['id' => $item['product_id']]);
+            if ($product) {
+                $total = $item['amount'] * $product->price;
+                $combined[] = [
+                    'name' => $product->name,
+                    'amount' => $item['amount'],
+                    'price' => $product->price,
+                    'total' => $total
+                ];
+                $totalPrice += $total;  // Dodajemo ukupnu cenu proizvoda
+            }
         }
-        return view('products.cart', compact('cart', 'totalPrice'));
+        return view('products.cart', compact('totalPrice', 'product', 'combined'));
     }
 
 

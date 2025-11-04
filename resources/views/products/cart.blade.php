@@ -16,7 +16,7 @@
             </div>
         @endif
 
-        @if(is_array($cart) && count($cart) > 0)
+        @if(is_array($combined) && count($combined) > 0)
             <div class="cart-table">
                 <table class="table table-striped">
                     <thead>
@@ -28,18 +28,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($cart as $product)
+                    @foreach($combined as $product)
                         <tr>
                             <td>{{ $product['name'] }}</td>
                             <td>{{ $product['amount'] }}</td>
-                            <td>{{ $product['price']  }}€</td>
-                            <td>{{ $product['amount'] * $product['price'] }}€</td>
+                            <td>{{ $product['price'] }}€</td>
+                            <td>{{ $product['total'] }}€</td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
                 <div class="cart-summary">
-                    <h4>Ukupno: {{ $totalPrice }}€</h4>
+                    <h4>Ukupna vrednost korpe: {{ $totalPrice }}€</h4>
                 </div>
             </div>
         @else
