@@ -28,7 +28,7 @@ class ContactRepository
         if (!$contact) {
             abort(404, 'Kontakt nije pronađen.');
         }
-       $contact->delete(); // Soft delete
+       $contact->delete();
     }
     public function undoDelete($id)
     {
@@ -46,7 +46,7 @@ class ContactRepository
         $contact->subject = $request->subject;
         $contact->message = $request->message;
 
-        // Spasi promene
+
         $contact->save();
 
         $contact->update($request->all());

@@ -25,17 +25,17 @@ class ProductRepository
     }
     public function updateExist($request, $id)
     {
-        // Pronađi proizvod sa specifičnim ID-jem
+
         $product = ProductModel::findOrFail($id);
 
-        // Ažuriraj podatke iz request-a
+
         $product->name = $request->name;
         $product->description = $request->description;
         $product->amount = $request->amount;
         $product->price = $request->price;
         $product->image = $request->image;
 
-        // Spasi promene
+
         $product->save();
     }
 

@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <form method="POST" action="/admin/add-products" enctype="multipart/form-data" class="w-75">
+    <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data" class="w-75">
         @csrf
 
         <div class="mb-3">

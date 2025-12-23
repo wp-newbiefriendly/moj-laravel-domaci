@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('subject'); //VARCHAR(192) SUBJECT characters
             $table->text('message'); // TEXT - message
             $table->softDeletes();
+
             $table->timestamps();
         });
     }

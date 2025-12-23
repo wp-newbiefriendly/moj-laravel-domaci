@@ -15,9 +15,9 @@ Route::get('/shop', [ShopController::class, 'index']);
 Route::get('products/{product}', [ProductsController::class, 'permalink'])->name('products.permalink');
 
 Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('cart')->name("cart.")->group(function () {
-   Route::post("cart/add", [ShoppingCartController::class, 'addToCart'])->name('add');
-   Route::get("/cart", [ShoppingCartController::class, 'index'])->name('index');
-   Route::get("/cart/finish", [ShoppingCartController::class, 'finishOrder'])->name('finish');
+   Route::post("/add", [ShoppingCartController::class, 'addToCart'])->name('add');
+   Route::get("/", [ShoppingCartController::class, 'index'])->name('index');
+   Route::get("/finish", [ShoppingCartController::class, 'finishOrder'])->name('finish');
     });
 
 Route::get('/contact', [ContactController::class, 'index']);
