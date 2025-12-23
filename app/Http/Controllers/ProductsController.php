@@ -10,8 +10,12 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
-    private $productRepo;
-    public function __construct(private ProductRepository $productRepository){}
+    private ProductRepository $productRepo;
+
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepo = $productRepository;
+    }
 
     // GET: Prikaz svih proizvoda
     public function showAllProducts() {
@@ -44,7 +48,7 @@ class ProductsController extends Controller
     public function editProduct(ProductModel $product)
     {
         if(!$product === null) {
-            die('Ovaj proizvod ne postoji!');
+            abort(404, 'Ovaj proizvod ne postoji!');
         }
         return view('products.edit', compact('product'));
 

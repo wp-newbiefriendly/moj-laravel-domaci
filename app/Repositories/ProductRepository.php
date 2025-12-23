@@ -41,7 +41,7 @@ class ProductRepository
 
     public function deleteExist($id)
     {
-        $product = ProductModel::findOrFail($id);
+        $product = ProductModel::where('id', $id)->firstOrFail();;
 
         $product->delete();
 

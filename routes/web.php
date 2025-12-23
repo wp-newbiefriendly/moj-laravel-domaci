@@ -13,9 +13,12 @@ Route::view('/about', 'about');
 Route::view('/test', 'test');
 Route::get('/shop', [ShopController::class, 'index']);
 Route::get('products/{product}', [ProductsController::class, 'permalink'])->name('products.permalink');
-Route::post("cart/add", [ShoppingCartController::class, 'addToCart'])->name('cart.add');
-Route::get("/cart", [ShoppingCartController::class, 'index'])->name('cart.index');
-Route::get("/cart/finish", [ShoppingCartController::class, 'finishOrder'])->name('cart.finish');
+
+Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('cart')->name("cart.")->group(function () {
+   Route::post("cart/add", [ShoppingCartController::class, 'addToCart'])->name('add');
+   Route::get("/cart", [ShoppingCartController::class, 'index'])->name('index');
+   Route::get("/cart/finish", [ShoppingCartController::class, 'finishOrder'])->name('finish');
+    });
 
 Route::get('/contact', [ContactController::class, 'index']);
 
@@ -39,7 +42,7 @@ Route::middleware(['auth', AdminCheckMiddleware::class])->prefix('admin')->group
         Route::get('/edit/{product}', 'editProduct')->name('edit');
         Route::put('/update/{product}', 'updateProduct')->name('update');
         Route::get('/delete/{product}', 'deleteProduct')->name('delete');
-        Route::get('/undo/{id}', 'undoDelete')->name('products.undo');
+        Route::get('/undo/{id}', 'undoDelete')->name('undo');
     });
 });
 

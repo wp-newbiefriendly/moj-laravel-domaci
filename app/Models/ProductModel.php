@@ -17,5 +17,10 @@ class ProductModel extends Model
           'name', 'description', 'amount', 'price', 'image'
       ];
 
+//    public function getRouteKeyName(): string
+//    {
+//        return 'slug';
+//    }
+
 }
 
